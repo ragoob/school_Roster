@@ -1,8 +1,10 @@
+### (I implemented loosely  coupled architecture)
+
 ## Architecture 
-### Core : conatin entities and abstraction of entities repositories 
-### infrastructure : contain reposoitories implementation 
-### Services : contain application services 
-### App : is nest js web api project 
+#### Core : contain  entities and abstraction of entities repositories 
+#### infrastructure : contain  reposoitories implementation 
+#### Services : contain  application services 
+#### App : is nest js web api project 
 
 ## Build Libs 
  core , infrastructure , service 

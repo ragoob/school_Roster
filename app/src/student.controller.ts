@@ -13,6 +13,7 @@ export class StudentController {
   findByGrade(@Param() params): StudentDTO[] {
     if(params.id === null)
     throw new HttpException('grade is required',HttpStatus.BAD_REQUEST);
+    
     return this.studentService.getStudentByGrade(params.id);
   }
 

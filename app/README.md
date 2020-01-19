@@ -10,6 +10,7 @@
  core , infrastructure , service 
  ```bash
  $npm run build 
+```
 
 ## Installation
 

@@ -1,31 +1,31 @@
-import { Controller, Get, Post, Body, HttpException, HttpStatus, Param, Inject} from '@nestjs/common';
-import {StudentDTO,IStudentService} from '../../services/build/index'
-
+import { Controller, Get, Post, Body, Param, Inject, Res, HttpStatus } from '@nestjs/common';
+import { StudentDTO, IStudentService } from '../../services/build/index'
+import { Response } from 'express';
 @Controller('Student')
 export class StudentController {
-    constructor(@Inject('IStudentService') private studentService : IStudentService){}
-   @Get()
-   findAll() : any[]{
+  constructor(@Inject('IStudentService') private studentService: IStudentService) { }
+  @Get()
+  findAll(): any[] {
     return this.studentService.getAllStudents();
-   }
+  }
 
   @Get(':id')
   findByGrade(@Param() params): StudentDTO[] {
-    if(params.id === null)
-    throw new HttpException('grade is required',HttpStatus.BAD_REQUEST);
-    
     return this.studentService.getStudentByGrade(params.id);
   }
 
-@Post()
-async create(@Body() student : StudentDTO) {
-  if(student == null)
-  throw new HttpException('Student Data should not be null',HttpStatus.BAD_REQUEST);
-  try{
+  @Post()
+  async create(@Res() res: Response, @Body() student: StudentDTO) {
+    if (!this.IsGradeExist(student.grade)) {
+      res.status(HttpStatus.FORBIDDEN).send(`Grade with number ${student.grade} not exist`);
+    }
+
     this.studentService.createStudent(student);
+    res.status(HttpStatus.CREATED).send();
   }
-  catch(error){
-    throw new HttpException(error.message,HttpStatus.FORBIDDEN);
+
+  private IsGradeExist(grade: number): boolean {
+    return this.studentService.findGrade(grade) != undefined;
   }
-}
+
 }

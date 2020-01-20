@@ -1,2 +1,2 @@
-export {Student} from './student'
-export {StudentsGrade} from './studentsGrade'
+export { Student } from './student'
+export { StudentsGrade } from './studentsGrade'

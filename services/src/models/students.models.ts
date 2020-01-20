@@ -1,5 +1,4 @@
-import {StudentsGradeDTO} from './grade.model'
+import { StudentsGradeDTO } from './grade.model'
 export class StudentDTO {
-    name : string;
-    grade:number;
+    constructor(public name: string, public grade: number) { }
 }
